@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class ConcatenatedIteratorCollection<E> implements Iterator<E> {
 	private Iterator<E> currentIterator = null;
 	private ArrayList<Iterable<E>> iterables = null;
-	private int iteratorsIndex = 0;
+	private int iteratorsIndex = -1;
 	
 	public ConcatenatedIteratorCollection() {
 		iterables = new ArrayList<Iterable<E>>();
@@ -49,8 +49,10 @@ public class ConcatenatedIteratorCollection<E> implements Iterator<E> {
  * 
  * @param iterable class to retrieve and add an iterator to the iterator collection.
  */
-	public void addIterable(Iterable<E> iterable) {
-		iterables.add(iterable);
+	public void addIterable(Iterable<E> iterable) { 
+		if(iterable instanceof Iterable<?>) {
+			iterables.add(iterable);
+		}
 	}
 	
 /**
